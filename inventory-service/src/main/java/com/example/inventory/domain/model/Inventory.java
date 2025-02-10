@@ -1,4 +1,4 @@
-package com.example.client.domain.model;
+package com.example.inventory.domain.model;
 
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -9,10 +9,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Client {
+public class Inventory {
 
   private String id;
-  private String name;
-  private String email;
+  private Long companyId;
+  private Long productId;
+  private Integer quantity;
 
 }

@@ -1,20 +1,19 @@
 package com.example.client.infrastructure.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "client")
+@Entity
+@Table(name = "client")
 @Getter
 @Setter
 @RequiredArgsConstructor
 public class ClientEntity {
 
   @Id
-  private String nit;
-  private String name;
-  private String address;
-  private String numberPhone;
+  private String id;
+  private String nombre;
+  private String correo;
 }
