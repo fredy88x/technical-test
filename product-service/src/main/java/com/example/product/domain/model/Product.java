@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.math.BigDecimal;
 import java.util.Set;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +18,6 @@ public class Product {
   private String attributes;
   private BigDecimal price;
   private Set<Category> categories;
+  private String company;
 
 }
