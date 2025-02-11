@@ -1,23 +1,15 @@
 package com.example.order.domain.model;
 
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
 @Setter
 @Getter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Order {
-
-  private String id;
-  private String clientId;
-  private BigDecimal totalAmount;
-  private String status;
-  private Set<OrderProduct> orderProducts;
-
+public class OrderProduct {
+    private Long orderId;
+    private Long productId;
+    private Integer quantity;
 }

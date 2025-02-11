@@ -14,6 +14,6 @@ public class ClientEntity {
 
   @Id
   private String id;
-  private String nombre;
-  private String correo;
+  private String name;
+  private String email;
 }

@@ -22,8 +22,7 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
   @Override
   public Product save(Product product) {
     ProductEntity productEntity = ProductMapper.INSTANCE.productToProductEntity(product);
-    ProductEntity ProductSaved = jpaProductRepository.save(
-        productEntity);
+    ProductEntity ProductSaved = jpaProductRepository.save(productEntity);
     return ProductMapper.INSTANCE.productEntityToProduct(ProductSaved);
   }
 

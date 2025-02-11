@@ -26,27 +26,27 @@ public class ClientController {
   private final UpdateClientUseCase updateClientUseCase;
 
   @PostMapping
-  public ResponseEntity<?> createProduct(@RequestBody Client client) {
+  public ResponseEntity<?> createClient(@RequestBody Client client) {
     return new ResponseEntity<>(createClientUseCase.createClient(client), HttpStatus.CREATED);
   }
 
-  @GetMapping("/{productId}")
-  public ResponseEntity<?> getProductById(@PathVariable String productId) {
-    return getClientUseCase.getClient(productId)
-        .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
+  @GetMapping("/{clientId}")
+  public ResponseEntity<?> getClientById(@PathVariable String clientId) {
+    return getClientUseCase.getClient(clientId)
+        .map(client -> new ResponseEntity<>(client, HttpStatus.OK))
         .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
   @GetMapping
-  public ResponseEntity<?> getAllCompanies() {
+  public ResponseEntity<?> getAllClients() {
     return new ResponseEntity<>(getClientUseCase.getClients(), HttpStatus.OK);
   }
 
-  @PutMapping("/{productId}")
-  public ResponseEntity<?> updateProduct(@PathVariable String productId,
+  @PutMapping("/{clientId}")
+  public ResponseEntity<?> updateClient(@PathVariable String clientId,
       @RequestBody Client client) {
-    return updateClientUseCase.updateClient(productId, client)
-        .map(productElement -> new ResponseEntity<>(productElement, HttpStatus.OK))
+    return updateClientUseCase.updateClient(clientId, client)
+        .map(clientElement -> new ResponseEntity<>(clientElement, HttpStatus.OK))
         .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 }

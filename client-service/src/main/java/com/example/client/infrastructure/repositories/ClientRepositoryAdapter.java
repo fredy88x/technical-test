@@ -41,7 +41,7 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
   public Optional<Client> update(
       Client client) {
     return Optional.ofNullable(client)
-        .filter(element -> jpaClientRepository.existsById(client.getNit()))
+        .filter(element -> jpaClientRepository.existsById(client.getId()))
         .map(ClientMapper.INSTANCE::clientToClientEntity)
         .map(jpaClientRepository::save)
         .map(ClientMapper.INSTANCE::clientEntityToClient);
