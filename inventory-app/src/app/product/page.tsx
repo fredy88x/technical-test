@@ -54,7 +54,7 @@ export default function ProductPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/api/company', product);
+            const response = await axios.post('http://localhost:8083/api/product', product);
             console.log('Product saved:', response.data);
             setAlert('Product saved successfully!');
             setProduct({
@@ -66,8 +66,8 @@ export default function ProductPage() {
         categories: []
             });
         } catch (error) {
-            console.error('Error saving company:', error);
-            setAlert('Error saving company: ');
+            console.error('Error saving product:', error);
+            setAlert('Error saving product: ');
         }
     };
 

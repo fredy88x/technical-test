@@ -1,48 +1,33 @@
 "use client"
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+interface Product {
+    code: string;
+    name: string;
+    company: string;
+    attributes: string;
+    price: number;
+}
 
 export default function InventoryPage() {
-    const [items, setItems] = useState<{ name: string; quantity: string; price: string; }[]>([]);
-    const [newItem, setNewItem] = useState({ name: '', quantity: '', price: '' });
+    const [items, setItems] = useState<Product[]>([]);
 
-    const handleInputChange = (e: { target: { id: any; value: any; }; }) => {
-        const { id, value } = e.target;
-        setNewItem({ ...newItem, [id]: value });
-    };
 
-    const handleAddItem = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        setItems([...items, newItem]);
-        setNewItem({ name: '', quantity: '', price: '' });
-    };
+    useEffect(() => {
+        axios.get('http://localhost:8083/api/product')
+            .then(response => {
+                console.log('Products:', response.data);
+                setItems(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
+    }, []);
+    
 
     return (
         <div className="container mt-5">
-            <div className="card shadow-lg rounded-lg p-4">
-                <div className="card-body">
-                    <h2 className="card-title">Inventory Control</h2>
-                    <form onSubmit={handleAddItem}>
-                        <div className="row">
-                            <div className="col-md-4 mb-3">
-                                <label htmlFor="name" className="form-label">Item Name</label>
-                                <input type="text" className="form-control" id="name" value={newItem.name} onChange={handleInputChange} placeholder="Enter item name" />
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label htmlFor="quantity" className="form-label">Quantity</label>
-                                <input type="number" className="form-control" id="quantity" value={newItem.quantity} onChange={handleInputChange} placeholder="Enter quantity" />
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label htmlFor="price" className="form-label">Price</label>
-                                <input type="number" className="form-control" id="price" value={newItem.price} onChange={handleInputChange} placeholder="Enter price" />
-                            </div>
-                        </div>
-                        <div className="text-end mt-4">
-                            <button type="submit" className="btn btn-success">Add Item</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div className="card shadow-lg rounded-lg p-4 mt-4">
                 <div className="card-body">
                     <h2 className="card-title">Inventory List</h2>
@@ -51,7 +36,8 @@ export default function InventoryPage() {
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Quantity</th>
+                                <th scope="col">Attributes</th>
+                                <th scope="col">Company</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
@@ -60,7 +46,8 @@ export default function InventoryPage() {
                                 <tr key={index}>
                                     <th scope="row">{index + 1}</th>
                                     <td>{item.name}</td>
-                                    <td>{item.quantity}</td>
+                                    <td>{item.attributes}</td>
+                                    <td>{item.company}</td>
                                     <td>{item.price}</td>
                                 </tr>
                             ))}
