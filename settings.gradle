@@ -1,0 +1,9 @@
+// Permite abrir technical-test/ en cualquier IDE e importar todos los microservicios.
+// Cada servicio sigue siendo un build independiente (cd <servicio> && ./gradlew bootRun).
+rootProject.name = 'technical-test'
+
+includeBuild 'product-service'
+includeBuild 'client-service'
+includeBuild 'order-service'
+includeBuild 'company-services'
+includeBuild 'inventory-service'

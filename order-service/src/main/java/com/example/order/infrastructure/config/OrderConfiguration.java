@@ -7,16 +7,23 @@ import com.example.order.application.usecases.UpdateOrderUseCaseImplementation;
 import com.example.order.domain.port.in.CreateOrderUseCase;
 import com.example.order.domain.port.in.GetOrderUseCase;
 import com.example.order.domain.port.in.UpdateOrderUseCase;
+import com.example.order.domain.port.out.ClientRestPort;
 import com.example.order.domain.port.out.OrderRepositoryPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class OrderConfiguration {
 
   @Bean
-  public CreateOrderUseCase createOrderUseCase(OrderRepositoryPort OrderRepositoryPort) {
-    return new CreateOrderUseCaseImplementation(OrderRepositoryPort);
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
+
+  @Bean
+  public CreateOrderUseCase createOrderUseCase(OrderRepositoryPort OrderRepositoryPort, ClientRestPort clientRestPort) {
+    return new CreateOrderUseCaseImplementation(OrderRepositoryPort, clientRestPort);
   }
 
   @Bean
